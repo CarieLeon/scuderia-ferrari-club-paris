@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { navItems, siteConfig } from "@/lib/site";
@@ -17,6 +17,8 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const lenis = useLenis();
+  const menuRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -36,6 +38,39 @@ export default function Header() {
     if (open) lenis.stop();
     else lenis.start();
   }, [open, lenis]);
+
+  // Focus management for the mobile menu: focus the first link on open, trap
+  // Tab within the overlay, Escape closes, and focus returns to the toggle.
+  useEffect(() => {
+    if (!open) return;
+    const focusables = menuRef.current?.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled])',
+    );
+    const t = window.setTimeout(() => focusables?.[0]?.focus(), 60);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (e.key === "Tab" && focusables && focusables.length) {
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.clearTimeout(t);
+      window.removeEventListener("keydown", onKey);
+      toggleRef.current?.focus?.();
+    };
+  }, [open]);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -103,9 +138,11 @@ export default function Header() {
           </Button>
 
           <button
+            ref={toggleRef}
             type="button"
             aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
             aria-expanded={open}
+            aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}
             className="relative z-50 flex h-10 w-10 items-center justify-center text-white lg:hidden"
           >
@@ -118,6 +155,11 @@ export default function Header() {
       <AnimatePresence>
         {open && (
           <motion.div
+            ref={menuRef}
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu de navigation"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

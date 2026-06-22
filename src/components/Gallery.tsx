@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 import Image from "next/image";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { getImageDims } from "@/lib/image-dimensions";
 import { cn } from "@/lib/utils";
@@ -38,6 +38,11 @@ export default function Gallery({
   const [visible, setVisible] = useState<number>(pageSize ?? images.length);
   const [lightbox, setLightbox] = useState<number | null>(null);
 
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const lastFocusedRef = useRef<HTMLElement | null>(null);
+  const isOpen = lightbox !== null;
+
   const filtered = useMemo(() => {
     if (!withFilters || activeCat === "all") return images;
     return images.filter((img) => img.category === activeCat);
@@ -60,16 +65,43 @@ export default function Gallery({
     [filtered.length],
   );
 
+  // Keyboard: Escape / arrows + focus trap (Tab cycles within the dialog).
   useEffect(() => {
-    if (lightbox === null) return;
+    if (!isOpen) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
-      if (e.key === "ArrowRight") go(1);
-      if (e.key === "ArrowLeft") go(-1);
+      if (e.key === "Escape") return close();
+      if (e.key === "ArrowRight") return go(1);
+      if (e.key === "ArrowLeft") return go(-1);
+      if (e.key === "Tab") {
+        const focusables = dialogRef.current?.querySelectorAll<HTMLElement>(
+          "button:not([disabled])",
+        );
+        if (!focusables || focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [lightbox, close, go]);
+  }, [isOpen, close, go]);
+
+  // Focus management: move focus into the dialog on open, restore it on close.
+  useEffect(() => {
+    if (!isOpen) return;
+    lastFocusedRef.current = document.activeElement as HTMLElement | null;
+    const t = window.setTimeout(() => closeBtnRef.current?.focus(), 60);
+    return () => {
+      window.clearTimeout(t);
+      lastFocusedRef.current?.focus?.();
+    };
+  }, [isOpen]);
 
   const current = lightbox !== null ? filtered[lightbox] : null;
 
@@ -144,6 +176,10 @@ export default function Gallery({
       <AnimatePresence>
         {current && (
           <motion.div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Visionneuse photo"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -151,6 +187,7 @@ export default function Gallery({
             onClick={close}
           >
             <button
+              ref={closeBtnRef}
               type="button"
               aria-label="Fermer"
               onClick={close}

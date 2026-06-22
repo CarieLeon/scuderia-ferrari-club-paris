@@ -150,6 +150,7 @@ export default function HeroSlider({
             key={src}
             type="button"
             aria-label={`Voir la photo ${i + 1}`}
+            aria-current={i === active ? "true" : undefined}
             onClick={() => setActive(i)}
             className="group flex h-6 items-center"
           >

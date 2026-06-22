@@ -11,11 +11,9 @@ import { useState } from "react";
 export default function GoogleFormEmbed({
   src,
   title = "Formulaire d'adhésion",
-  height = 1500,
 }: {
   src: string;
   title?: string;
-  height?: number;
 }) {
   const [loaded, setLoaded] = useState(false);
 
@@ -39,13 +37,15 @@ export default function GoogleFormEmbed({
         </div>
       )}
 
+      {/* Height is sized generously per breakpoint so the whole form (incl. the
+          submit button) is visible without an awkward nested scroll. If you add
+          many questions to the Google Form, bump these heights. */}
       <iframe
         src={src}
         title={title}
         onLoad={() => setLoaded(true)}
         loading="lazy"
-        style={{ height }}
-        className="w-full"
+        className="h-[1280px] w-full sm:h-[1050px]"
       >
         Chargement du formulaire…
       </iframe>

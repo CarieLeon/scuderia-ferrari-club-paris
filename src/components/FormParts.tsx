@@ -9,7 +9,7 @@ export const labelClass =
   "mb-2 block text-xs font-semibold uppercase tracking-widest text-white/55";
 
 export const controlClass =
-  "w-full rounded-md border border-white/15 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-all duration-300 focus:border-rosso focus:bg-white/[0.05] focus:ring-1 focus:ring-rosso/60";
+  "w-full rounded-md border border-white/15 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-white/50 outline-none transition-all duration-300 focus:border-rosso focus:bg-white/[0.05] focus:ring-1 focus:ring-rosso/60";
 
 export function Field({
   label,
@@ -61,7 +61,11 @@ export function SuccessPanel({
   message: string;
 }) {
   return (
-    <div className="flex flex-col items-center rounded-lg border border-rosso/30 bg-rosso/5 px-8 py-14 text-center">
+    <div
+      role="status"
+      aria-live="polite"
+      className="flex flex-col items-center rounded-lg border border-rosso/30 bg-rosso/5 px-8 py-14 text-center"
+    >
       <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-rosso/15 text-rosso">
         <CheckCircle2 className="h-7 w-7" />
       </span>

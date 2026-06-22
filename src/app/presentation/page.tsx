@@ -141,7 +141,7 @@ export default function PresentationPage() {
             <Reveal direction="left" className="relative">
               <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-white/10">
                 <Image
-                  src={heroImages[2]}
+                  src={heroImages[3]}
                   alt="Rassemblement de Ferrari du Scuderia Ferrari Club Paris"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"

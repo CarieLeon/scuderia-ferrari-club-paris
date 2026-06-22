@@ -125,7 +125,7 @@ export default function HomePage() {
             {events.map((event, i) => (
               <Reveal key={event.slug} delay={i * 0.08} className="h-full">
                 <Link
-                  href="/evenements"
+                  href={`/evenements#${event.slug}`}
                   className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-white/10 bg-card transition-all duration-300 hover:-translate-y-1 hover:border-rosso hover:shadow-[0_20px_50px_rgba(255,40,0,0.18)]"
                 >
                   {/* Cover */}

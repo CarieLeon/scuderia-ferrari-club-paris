@@ -45,7 +45,7 @@ export default function EvenementsPage() {
 
             <ol className="space-y-24 md:space-y-32">
               {eventsChronological.map((event, index) => (
-                <li key={event.slug} className="relative">
+                <li key={event.slug} id={event.slug} className="relative scroll-mt-28">
                   <Reveal>
                     <article className="relative pl-12 md:pl-16">
                       {/* Marker dot */}

@@ -44,7 +44,7 @@ src/
     not-found.tsx            # 404
     sitemap.ts, robots.ts, layout.tsx, globals.css
   components/         # Header, Footer, HeroSlider, Gallery, Reveal, AnimatedCounter,
-                     # SectionHeading, PageHeader, MembershipForm, ContactForm, ui/*
+                     # SectionHeading, PageHeader, Preloader, GoogleFormEmbed, ContactForm, ui/*
   lib/               # site.ts, images.ts, content.ts, image-dimensions.json, utils.ts
 ```
 
@@ -58,11 +58,14 @@ réseaux) est dans `src/lib/site.ts`.
 
 ## Formulaires
 
-Les formulaires d'**adhésion** et de **contact** sont fonctionnels côté client
-(validation + état de confirmation) mais **ne sont pas encore connectés à un
-backend**. Pour envoyer réellement les messages, branchez un Route Handler
-(`app/api/.../route.ts`) ou un service d'emailing (Resend, Formspree, etc.) dans
-`src/components/MembershipForm.tsx` et `src/components/ContactForm.tsx`.
+L'**adhésion** utilise le vrai **Google Form** du club, intégré en iframe
+(`src/components/GoogleFormEmbed.tsx`) — les soumissions arrivent directement
+dans le formulaire Google.
+
+Le formulaire de **contact** (`src/components/ContactForm.tsx`) est fonctionnel
+côté client (validation + état de confirmation) mais **n'est pas encore connecté
+à un backend**. Pour envoyer réellement les messages, branchez un Route Handler
+(`app/api/.../route.ts`) ou un service d'emailing (Resend, Formspree, etc.).
 
 ## Déploiement (Vercel)
 

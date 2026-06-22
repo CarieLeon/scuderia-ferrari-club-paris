@@ -255,7 +255,7 @@ export default function AdhesionPage() {
 
             {/* Right — the Google Form */}
             <Reveal direction="right" delay={0.1}>
-              <GoogleFormEmbed src={membershipInfo.formUrl} height={1500} />
+              <GoogleFormEmbed src={membershipInfo.formUrl} />
               <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
                 Formulaire hébergé par Google Forms. Vos informations ne servent
                 qu'au traitement de votre demande d'adhésion.
