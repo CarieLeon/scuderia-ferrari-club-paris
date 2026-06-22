@@ -1,0 +1,164 @@
+"use client";
+
+import { AnimatePresence, motion } from "motion/react";
+import { useLenis } from "lenis/react";
+import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { navItems, siteConfig } from "@/lib/site";
+import { cn } from "@/lib/utils";
+
+export default function Header() {
+  const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const lenis = useLenis();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Close the mobile menu on route change.
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  // Freeze smooth scroll while the mobile menu is open.
+  useEffect(() => {
+    if (!lenis) return;
+    if (open) lenis.stop();
+    else lenis.start();
+  }, [open, lenis]);
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  return (
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+        scrolled || open
+          ? "border-b border-white/10 bg-noir/85 backdrop-blur-xl"
+          : "border-b border-transparent bg-gradient-to-b from-black/60 to-transparent",
+      )}
+    >
+      <div className="container flex items-center justify-between">
+        <Link
+          href="/"
+          aria-label={siteConfig.name}
+          className={cn(
+            "relative z-50 flex items-center transition-all duration-500",
+            scrolled ? "py-3" : "py-5",
+          )}
+        >
+          <Image
+            src={siteConfig.logo}
+            alt={siteConfig.name}
+            width={2560}
+            height={567}
+            priority
+            className={cn(
+              "w-auto transition-all duration-500",
+              scrolled ? "h-9" : "h-10 md:h-11",
+            )}
+          />
+        </Link>
+
+        {/* Desktop nav */}
+        <nav className="hidden items-center gap-1 lg:flex">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "group relative px-4 py-2 text-sm font-medium uppercase tracking-wide transition-colors",
+                isActive(item.href)
+                  ? "text-white"
+                  : "text-white/65 hover:text-white",
+              )}
+            >
+              {item.label}
+              <span
+                className={cn(
+                  "absolute inset-x-4 -bottom-0.5 h-px origin-left bg-rosso transition-transform duration-300",
+                  isActive(item.href)
+                    ? "scale-x-100"
+                    : "scale-x-0 group-hover:scale-x-100",
+                )}
+              />
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <Button asChild size="sm" className="hidden sm:inline-flex">
+            <Link href="/adhesion">Adhérer</Link>
+          </Button>
+
+          <button
+            type="button"
+            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="relative z-50 flex h-10 w-10 items-center justify-center text-white lg:hidden"
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu overlay */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 bg-noir/98 backdrop-blur-xl lg:hidden"
+          >
+            <nav className="container flex h-full flex-col justify-center gap-2 pb-16">
+              {navItems.map((item, i) => (
+                <motion.div
+                  key={item.href}
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.08 + i * 0.06, duration: 0.4 }}
+                >
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      "block py-3 font-display text-4xl uppercase tracking-tight transition-colors",
+                      isActive(item.href)
+                        ? "text-rosso"
+                        : "text-white hover:text-rosso",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.4 }}
+                className="mt-8"
+              >
+                <Button asChild size="lg" className="w-full">
+                  <Link href="/adhesion">Devenir membre</Link>
+                </Button>
+              </motion.div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+}
