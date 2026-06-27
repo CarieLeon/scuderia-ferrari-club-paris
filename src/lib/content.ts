@@ -162,51 +162,24 @@ export const articles: Article[] = [
 export type TeamMember = {
   name: string;
   role: string;
-  bio: string;
 };
 
+/** Bureau du club (source : page officielle « Le Team SFC »). */
 export const teamMembers: TeamMember[] = [
-  {
-    name: "Alexandre Laurent",
-    role: "Président",
-    bio: "Passionné de Ferrari depuis l'enfance, il fédère le club autour de l'esprit Cheval Cabré et veille au rayonnement de la marque à Paris.",
-  },
-  {
-    name: "Caroline Mercier",
-    role: "Vice-Présidente",
-    bio: "Organisatrice dans l'âme, elle imagine et coordonne les sorties, week-ends et soirées qui rythment la vie du club.",
-  },
-  {
-    name: "Julien Fontaine",
-    role: "Responsable Événements",
-    bio: "Du choix des routes à la logistique des rassemblements, il orchestre chaque détail pour des moments mémorables.",
-  },
-  {
-    name: "Sophie Vasseur",
-    role: "Responsable Communication",
-    bio: "Plume et œil du club, elle raconte nos aventures et entretient le lien avec les membres et la communauté Ferrari.",
-  },
-  {
-    name: "Marc Delaunay",
-    role: "Trésorier",
-    bio: "Gardien de l'équilibre du club, il sécurise les moyens nécessaires à des événements toujours plus ambitieux.",
-  },
-  {
-    name: "Élodie Rousseau",
-    role: "Relations Membres",
-    bio: "Premier contact des nouveaux adhérents, elle accompagne chacun dans sa découverte de la vie du club.",
-  },
+  { name: "Karim Bentala", role: "Président" },
+  { name: "Franck Guglielmazzi", role: "Vice-Président" },
+  { name: "Pascal Launay", role: "Administrateur" },
 ];
 
 /* ----------------------------------------------------------- Key figures --- */
 
-export type Stat = { value: number; suffix: string; label: string };
+export type Stat = { value: string; label: string };
 
+/** Repères vérifiés (source : page officielle « Présentation »). */
 export const stats: Stat[] = [
-  { value: 120, suffix: "+", label: "Membres passionnés" },
-  { value: 45, suffix: "", label: "Événements organisés" },
-  { value: 30, suffix: " ans", label: "D'histoire et de passion" },
-  { value: 100, suffix: "%", label: "Club officiel Ferrari" },
+  { value: "2010", label: "Année de création" },
+  { value: "2012", label: "Reconnu officiel par Ferrari" },
+  { value: "1er", label: "Club Ferrari de France" },
 ];
 
 /* --------------------------------------------------------------- Values --- */
@@ -348,7 +321,7 @@ export const membershipInfo = {
 
 export const clubStory = {
   intro:
-    "Né de la passion commune pour le Cheval Cabré, le Scuderia Ferrari Club Paris rassemble depuis plus de trente ans celles et ceux qui font battre le cœur rouge de Maranello dans la capitale.",
+    "Né de la passion commune pour le Cheval Cabré, le Scuderia Ferrari Club Paris rassemble depuis 2010 celles et ceux qui font battre le cœur rouge de Maranello dans la capitale.",
   paragraphs: [
     "Reconnu comme club officiel par Ferrari, notre association cultive un attachement profond à l'histoire, aux valeurs et à l'esprit sportif de la marque la plus mythique de l'automobile.",
     "Tout au long de l'année, nous organisons rassemblements, road-trips, visites privées et soirées d'exception. Autant d'occasions de partager le plaisir de conduire, d'admirer des modèles d'hier et d'aujourd'hui, et de tisser des liens entre passionnés.",

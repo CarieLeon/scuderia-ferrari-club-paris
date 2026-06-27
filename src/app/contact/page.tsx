@@ -129,7 +129,7 @@ export default function ContactPage() {
                 <div className="relative">
                   <span className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gold">
                     <Clock className="h-4 w-4" />
-                    Club officiel depuis {siteConfig.foundingYear}
+                    Club officiel depuis {siteConfig.officialYear}
                   </span>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                     Reconnu par Ferrari, le {siteConfig.shortName} cultive

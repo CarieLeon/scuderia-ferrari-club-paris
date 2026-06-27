@@ -11,7 +11,6 @@ import {
   Users,
 } from "lucide-react";
 
-import AnimatedCounter from "@/components/AnimatedCounter";
 import Gallery, { type GalleryItem } from "@/components/Gallery";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
@@ -36,7 +35,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Présentation",
   description:
-    "Découvrez le Scuderia Ferrari Club Paris : notre histoire, nos valeurs, notre équipe et les rassemblements qui font vibrer la communauté du Cheval Cabré depuis plus de trente ans.",
+    "Découvrez le Scuderia Ferrari Club Paris : notre histoire, nos valeurs, notre équipe et les rassemblements qui font vibrer la communauté du Cheval Cabré depuis 2010.",
 };
 
 const valueIcons = [Heart, Users, Trophy, Star] as const;
@@ -68,7 +67,7 @@ export default function PresentationPage() {
         title="Présentation"
         description={
           <>
-            Plus de trente ans de passion partagée pour le Cheval Cabré. Le{" "}
+            Depuis 2010, une même passion pour le Cheval Cabré. Le{" "}
             <span className="text-blanc">Scuderia Ferrari Club Paris</span>{" "}
             réunit propriétaires et amoureux de Maranello autour d&apos;un même
             feu rouge.
@@ -211,21 +210,19 @@ export default function PresentationPage() {
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-2 gap-y-12 md:grid-cols-4">
+          <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-3">
             {stats.map((stat, i) => (
               <Reveal
                 key={stat.label}
                 delay={i * 0.08}
-                className="relative px-4 text-center md:px-6"
+                className="relative px-4 text-center sm:px-6"
               >
                 {i > 0 && (
-                  <span className="absolute left-0 top-1/2 hidden h-16 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-white/15 to-transparent md:block" />
+                  <span className="absolute left-0 top-1/2 hidden h-16 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-white/15 to-transparent sm:block" />
                 )}
-                <AnimatedCounter
-                  value={stat.value}
-                  suffix={stat.suffix}
-                  className="font-display text-5xl uppercase leading-none text-gradient-rosso sm:text-6xl lg:text-7xl"
-                />
+                <span className="block font-display text-5xl uppercase leading-none text-gradient-rosso sm:text-6xl lg:text-7xl">
+                  {stat.value}
+                </span>
                 <p className="mt-4 text-xs uppercase tracking-[0.2em] text-muted-foreground sm:text-sm">
                   {stat.label}
                 </p>
@@ -260,11 +257,8 @@ export default function PresentationPage() {
                   <h3 className="font-display text-xl uppercase tracking-tight text-white">
                     {member.name}
                   </h3>
-                  <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-rosso">
+                  <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-rosso">
                     {member.role}
-                  </p>
-                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                    {member.bio}
                   </p>
                 </div>
               </article>

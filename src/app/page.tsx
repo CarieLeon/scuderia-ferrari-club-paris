@@ -96,7 +96,7 @@ export default function HomePage() {
                 {/* Floating premium stat */}
                 <div className="absolute bottom-6 left-6 rounded-lg border border-white/10 bg-ink/70 px-5 py-3 backdrop-blur-md">
                   <span className="block font-display text-3xl leading-none text-gold">
-                    1996
+                    2010
                   </span>
                   <span className="mt-1 block text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">
                     Depuis
