@@ -8,6 +8,7 @@ import {
   FileText,
   Gift,
   Quote,
+  Sparkles,
   Users,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -22,6 +23,7 @@ import {
   membershipInfo,
   membershipSteps,
   membershipTiers,
+  welcomeKit,
 } from "@/lib/content";
 import { heroImages, membresImages } from "@/lib/images";
 
@@ -58,7 +60,7 @@ export default function AdhesionPage() {
             const Icon = advantageIcons[index % advantageIcons.length];
             return (
               <Reveal key={advantage.title} delay={index * 0.08}>
-                <article className="group relative h-full overflow-hidden rounded-lg border border-white/10 bg-card p-8 transition-all duration-300 hover:-translate-y-1 hover:border-rosso hover:shadow-[0_20px_50px_rgba(255,40,0,0.18)] sm:p-10">
+                <article className="group relative h-full overflow-hidden rounded-lg border border-border bg-card p-8 transition-all duration-300 hover:-translate-y-1 hover:border-rosso hover:shadow-[0_20px_50px_rgba(255,40,0,0.18)] sm:p-10">
                   <span className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <div className="flex items-start gap-5">
                     <span className="relative grid size-14 shrink-0 place-items-center rounded-full border border-gold/30 bg-gold/5 text-gold transition-colors duration-300 group-hover:border-rosso/60 group-hover:bg-rosso/10 group-hover:text-rosso">
@@ -68,7 +70,7 @@ export default function AdhesionPage() {
                       <span className="block font-display text-sm uppercase tracking-[0.25em] text-gold/70">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <h3 className="font-display text-2xl uppercase tracking-tight text-white">
+                      <h3 className="font-display text-2xl uppercase tracking-tight text-foreground">
                         {advantage.title}
                       </h3>
                       <p className="text-base leading-relaxed text-muted-foreground">
@@ -102,7 +104,7 @@ export default function AdhesionPage() {
                     "group relative flex h-full flex-col rounded-xl border bg-card p-7 transition-all duration-300 hover:-translate-y-1",
                     tier.featured
                       ? "border-rosso/60 shadow-[0_25px_60px_rgba(255,40,0,0.2)] lg:scale-[1.03]"
-                      : "border-white/10 hover:border-rosso/50",
+                      : "border-border hover:border-rosso/50",
                   )}
                 >
                   {tier.featured && (
@@ -111,7 +113,7 @@ export default function AdhesionPage() {
                     </span>
                   )}
 
-                  <h3 className="font-display text-2xl uppercase tracking-tight text-white">
+                  <h3 className="font-display text-2xl uppercase tracking-tight text-foreground">
                     {tier.name}
                   </h3>
 
@@ -119,7 +121,7 @@ export default function AdhesionPage() {
                     <span
                       className={cn(
                         "font-display text-5xl leading-none",
-                        tier.featured ? "text-gradient-rosso" : "text-white",
+                        tier.featured ? "text-gradient-rosso" : "text-foreground",
                       )}
                     >
                       {tier.price}€
@@ -137,7 +139,7 @@ export default function AdhesionPage() {
 
                   <ul className="space-y-3">
                     {tier.perks.map((perk) => (
-                      <li key={perk} className="flex items-start gap-2.5 text-sm text-blanc/90">
+                      <li key={perk} className="flex items-start gap-2.5 text-sm text-foreground/80">
                         <Check className="mt-0.5 size-4 shrink-0 text-rosso" />
                         {perk}
                       </li>
@@ -151,7 +153,7 @@ export default function AdhesionPage() {
       </section>
 
       {/* ----------------------------------------------- Comment adhérer --- */}
-      <section className="border-y border-white/10 bg-ink py-24 md:py-32">
+      <section className="border-y border-border bg-background py-24 md:py-32">
         <div className="container">
           <SectionHeading
             eyebrow="Mode d'emploi"
@@ -166,7 +168,7 @@ export default function AdhesionPage() {
                   <span className="font-display text-6xl leading-none text-rosso/90">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-4 font-display text-xl uppercase tracking-tight text-white">
+                  <h3 className="mt-4 font-display text-xl uppercase tracking-tight text-foreground">
                     {step.title}
                   </h3>
                   <p className="mt-3 text-base leading-relaxed text-muted-foreground">
@@ -180,7 +182,7 @@ export default function AdhesionPage() {
           <Reveal delay={0.1}>
             <div className="mt-14 flex items-start gap-4 rounded-lg border border-gold/20 bg-gold/[0.04] p-6">
               <Calendar className="mt-0.5 size-5 shrink-0 text-gold" />
-              <p className="text-sm leading-relaxed text-blanc/85">
+              <p className="text-sm leading-relaxed text-foreground/80">
                 {membershipInfo.period}
               </p>
             </div>
@@ -224,25 +226,57 @@ export default function AdhesionPage() {
               </div>
 
               {/* Welcome kit highlight */}
-              <div className="flex items-center gap-4 rounded-lg border border-gold/20 bg-gold/[0.04] p-5">
-                <span className="grid size-11 shrink-0 place-items-center rounded-full border border-gold/40 bg-gold/10 text-gold">
-                  <Gift className="size-5" strokeWidth={1.6} aria-hidden />
-                </span>
-                <p className="text-sm leading-relaxed text-blanc/90">
-                  <span className="font-semibold text-gold">Welcome Kit offert</span>{" "}
-                  à chaque adhésion : carte de membre et goodies Scuderia.
-                </p>
+              <div className="rounded-lg border border-gold/20 bg-gold/[0.04] p-5">
+                <div className="flex items-center gap-3">
+                  <span className="grid size-11 shrink-0 place-items-center rounded-full border border-gold/40 bg-gold/10 text-gold">
+                    <Gift className="size-5" strokeWidth={1.6} aria-hidden />
+                  </span>
+                  <div>
+                    <p className="font-semibold text-gold">Welcome Kit offert</p>
+                    <p className="text-xs text-muted-foreground">
+                      Remis à chaque adhésion
+                    </p>
+                  </div>
+                </div>
+                <ul className="mt-4 space-y-2.5">
+                  {welcomeKit.items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-center gap-2.5 text-sm text-foreground/80"
+                    >
+                      <Check
+                        className="size-4 shrink-0 text-gold"
+                        strokeWidth={2.2}
+                        aria-hidden
+                      />
+                      {item}
+                    </li>
+                  ))}
+                  <li className="flex items-center gap-2.5 text-sm text-foreground/80">
+                    <Sparkles
+                      className="size-4 shrink-0 text-gold"
+                      strokeWidth={2}
+                      aria-hidden
+                    />
+                    <span>
+                      <span className="font-medium text-foreground">
+                        + un cadeau surprise
+                      </span>{" "}
+                      qui change chaque année
+                    </span>
+                  </li>
+                </ul>
               </div>
 
               {/* Payment methods */}
-              <div className="rounded-lg border border-white/10 bg-card p-6">
+              <div className="rounded-lg border border-border bg-card p-6">
                 <h3 className="eyebrow mb-5">Règlement de la cotisation</h3>
                 <ul className="space-y-4">
                   {membershipInfo.payment.map((method, i) => {
                     const Icon = paymentIcons[i % paymentIcons.length];
                     return (
-                      <li key={method} className="flex items-start gap-3 text-sm text-blanc/85">
-                        <span className="grid size-9 shrink-0 place-items-center rounded-md border border-white/10 bg-white/[0.03] text-rosso">
+                      <li key={method} className="flex items-start gap-3 text-sm text-foreground/80">
+                        <span className="grid size-9 shrink-0 place-items-center rounded-md border border-border bg-foreground/5 text-rosso">
                           <Icon className="size-4" />
                         </span>
                         <span className="pt-1.5 leading-relaxed">{method}</span>

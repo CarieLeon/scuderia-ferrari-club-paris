@@ -15,10 +15,10 @@ const buttonVariants = cva(
         // Gold / premium accent
         gold: "bg-gold text-noir hover:bg-gold-dark hover:-translate-y-0.5",
         outline:
-          "border border-white/20 bg-transparent text-white hover:border-rosso hover:text-rosso hover:bg-rosso/5",
+          "border border-foreground/25 bg-transparent text-foreground hover:border-rosso hover:text-rosso hover:bg-rosso/5",
         secondary:
-          "bg-carbon text-blanc hover:bg-carbon-light hover:-translate-y-0.5",
-        ghost: "text-white hover:bg-white/5 hover:text-rosso",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:-translate-y-0.5",
+        ghost: "text-foreground hover:bg-foreground/5 hover:text-rosso",
         link: "text-rosso underline-offset-4 hover:underline normal-case tracking-normal",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",

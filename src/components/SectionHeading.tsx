@@ -37,7 +37,7 @@ export default function SectionHeading({
       {eyebrow && <span className="eyebrow mb-5">{eyebrow}</span>}
       <h2
         className={cn(
-          "display-title text-4xl text-white sm:text-5xl lg:text-6xl",
+          "display-title text-4xl text-foreground sm:text-5xl lg:text-6xl",
           titleClassName,
         )}
       >

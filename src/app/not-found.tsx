@@ -36,7 +36,7 @@ export default function NotFound() {
         <div className="rule mx-auto mt-2 w-40 max-w-[60vw] md:w-56" />
 
         {/* Headline */}
-        <h2 className="display-title mt-10 text-3xl text-blanc sm:text-4xl md:text-5xl">
+        <h2 className="display-title mt-10 text-3xl text-foreground sm:text-4xl md:text-5xl">
           Page introuvable
         </h2>
 

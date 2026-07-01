@@ -25,7 +25,7 @@ export default function Footer() {
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
             {siteConfig.description}
           </p>
-          <SocialIcons className="mt-8" />
+          <SocialIcons className="mt-8" tone="onDark" />
         </div>
 
         {/* Navigation */}

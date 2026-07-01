@@ -103,7 +103,7 @@ export default async function Page({
         <Reveal className="mx-auto max-w-3xl">
           <p className="rule mb-12" />
 
-          <p className="mb-12 border-l-2 border-rosso pl-6 text-xl font-medium leading-relaxed text-blanc">
+          <p className="mb-12 border-l-2 border-rosso pl-6 text-xl font-medium leading-relaxed text-foreground">
             {article.excerpt}
           </p>
 
@@ -136,7 +136,7 @@ export default async function Page({
       </section>
 
       {/* -------------------------------------------------- Autres articles --- */}
-      <section className="bg-carbon-texture border-t border-white/10 py-24 md:py-32">
+      <section className="bg-carbon-texture border-t border-border py-24 md:py-32">
         <div className="container">
           <SectionHeading
             eyebrow="À lire également"
@@ -149,7 +149,7 @@ export default async function Page({
               <Reveal key={other.slug} delay={i * 0.08}>
                 <Link
                   href={`/actualites/${other.slug}`}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-white/10 bg-card transition-all duration-300 hover:-translate-y-1 hover:border-rosso hover:shadow-[0_20px_50px_rgba(255,40,0,0.18)]"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-rosso hover:shadow-[0_20px_50px_rgba(255,40,0,0.18)]"
                 >
                   <div className="relative aspect-[16/9] overflow-hidden">
                     <Image
@@ -174,7 +174,7 @@ export default async function Page({
                       </span>
                     </div>
 
-                    <h3 className="display-title text-2xl leading-tight text-white transition-colors group-hover:text-rosso">
+                    <h3 className="display-title text-2xl leading-tight text-foreground transition-colors group-hover:text-rosso">
                       {other.title}
                     </h3>
 
@@ -194,11 +194,11 @@ export default async function Page({
 
           {/* ---------------------------------------------------- CTA band --- */}
           <Reveal className="mt-20">
-            <div className="grain relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-noir via-carbon to-ink px-8 py-14 text-center md:px-16 md:py-20">
+            <div className="grain relative overflow-hidden rounded-2xl border border-border bg-card px-8 py-14 text-center md:px-16 md:py-20">
               <div className="absolute inset-0 bg-rosso-glow opacity-50" />
               <div className="relative z-10 mx-auto max-w-2xl">
                 <span className="eyebrow mb-5 justify-center">Rejoignez-nous</span>
-                <h2 className="display-title text-3xl text-white sm:text-4xl lg:text-5xl">
+                <h2 className="display-title text-3xl text-foreground sm:text-4xl lg:text-5xl">
                   Vivez la passion <span className="text-gradient-rosso">Ferrari</span> à nos côtés
                 </h2>
                 <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">

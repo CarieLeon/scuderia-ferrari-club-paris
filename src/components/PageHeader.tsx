@@ -27,7 +27,7 @@ export default function PageHeader({
   return (
     <section
       className={cn(
-        "relative overflow-hidden border-b border-white/10",
+        "relative overflow-hidden border-b border-border",
         image ? "pb-20 pt-44" : "bg-carbon-texture pb-16 pt-40",
         className,
       )}
@@ -49,12 +49,26 @@ export default function PageHeader({
 
       <div className="container relative z-10">
         <Reveal className="max-w-3xl">
-          {eyebrow && <span className="eyebrow mb-5">{eyebrow}</span>}
-          <h1 className="display-title text-5xl text-white sm:text-6xl lg:text-7xl">
+          {eyebrow && (
+            <span className={cn("eyebrow mb-5", image && "text-white/70")}>
+              {eyebrow}
+            </span>
+          )}
+          <h1
+            className={cn(
+              "display-title text-5xl sm:text-6xl lg:text-7xl",
+              image ? "text-white" : "text-foreground",
+            )}
+          >
             {title}
           </h1>
           {description && (
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            <p
+              className={cn(
+                "mt-6 max-w-2xl text-lg leading-relaxed",
+                image ? "text-white/80" : "text-muted-foreground",
+              )}
+            >
               {description}
             </p>
           )}

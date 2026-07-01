@@ -20,7 +20,7 @@ export default function GoogleFormEmbed({
   return (
     <div
       data-lenis-prevent
-      className="relative overflow-hidden rounded-xl border border-white/10 bg-white shadow-[0_30px_80px_rgba(0,0,0,0.5)]"
+      className="relative overflow-hidden rounded-xl border border-border bg-white shadow-[0_30px_80px_rgba(0,0,0,0.5)]"
     >
       {/* Top brand bar */}
       <div className="flex items-center gap-3 border-b border-black/10 bg-noir px-5 py-3">

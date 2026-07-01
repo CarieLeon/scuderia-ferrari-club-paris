@@ -82,7 +82,7 @@ export default function HeroSlider({
       </div>
 
       {/* Overlays for legibility */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-ink" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-background" />
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
       <div className="absolute inset-0 bg-rosso-glow opacity-70 mix-blend-screen" />
 
@@ -137,7 +137,12 @@ export default function HeroSlider({
           <Button asChild size="lg">
             <Link href="/adhesion">Devenir membre</Link>
           </Button>
-          <Button asChild size="lg" variant="outline">
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="border-white/40 text-white hover:bg-white/5"
+          >
             <Link href="/presentation">Découvrir le club</Link>
           </Button>
         </motion.div>

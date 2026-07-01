@@ -4,7 +4,44 @@
 
 @layer base {
   :root {
-    /* Dark-only theme — Scuderia Ferrari Club Paris */
+    /* Light theme — blanc pur (DA newsletter) */
+    color-scheme: light;
+
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+
+    --card: 0 0% 98%;
+    --card-foreground: 0 0% 9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+
+    --primary: 9 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 12%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 51 100% 49%;
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 9 100% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 9 100% 50%;
+
+    --radius: 0.4rem;
+  }
+
+  .dark {
+    /* Dark theme — Scuderia Ferrari Club Paris (thème d'origine) */
+    color-scheme: dark;
+
     --background: 0 0% 5%;
     --foreground: 0 0% 96%;
 
@@ -32,8 +69,6 @@
     --border: 0 0% 17%;
     --input: 0 0% 17%;
     --ring: 9 100% 50%;
-
-    --radius: 0.4rem;
   }
 }
 
@@ -58,20 +93,27 @@
     color: #fff;
   }
 
-  /* Custom scrollbar */
+  /* Custom scrollbar — light par défaut, override en dark */
   ::-webkit-scrollbar {
     width: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: #0d0d0d;
+    background: hsl(var(--muted));
   }
   ::-webkit-scrollbar-thumb {
-    background: #2d2d2d;
+    background: hsl(0 0% 75%);
     border-radius: 999px;
-    border: 2px solid #0d0d0d;
+    border: 2px solid hsl(var(--muted));
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #ff2800;
+  }
+  .dark ::-webkit-scrollbar-track {
+    background: #0d0d0d;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: #2d2d2d;
+    border-color: #0d0d0d;
   }
 
   /* Lenis smooth scroll */
@@ -105,9 +147,9 @@
     @apply font-display uppercase leading-[0.92] tracking-tight;
   }
 
-  /* Thin racing rule */
+  /* Thin racing rule — adapte au thème via foreground */
   .rule {
-    @apply h-px w-full bg-gradient-to-r from-transparent via-white/15 to-transparent;
+    @apply h-px w-full bg-gradient-to-r from-transparent via-foreground/15 to-transparent;
   }
 }
 
@@ -120,12 +162,17 @@
     color: transparent;
   }
 
-  /* Carbon-fibre texture overlay */
+  /* Carbon-fibre texture overlay — light par défaut, override en dark */
   .bg-carbon-texture {
+    background-color: #f4f4f4;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.04) 1px, transparent 0);
+    background-size: 4px 4px;
+  }
+  .dark .bg-carbon-texture {
     background-color: #141414;
     background-image:
       radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.035) 1px, transparent 0);
-    background-size: 4px 4px;
   }
 
   /* Subtle film grain */
@@ -136,6 +183,9 @@
     pointer-events: none;
     opacity: 0.06;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .dark .grain::after {
+    opacity: 0.06;
   }
 
   .mask-fade-b {

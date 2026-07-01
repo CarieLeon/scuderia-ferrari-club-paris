@@ -6,10 +6,10 @@ import type { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 export const labelClass =
-  "mb-2 block text-xs font-semibold uppercase tracking-widest text-white/55";
+  "mb-2 block text-xs font-semibold uppercase tracking-widest text-muted-foreground";
 
 export const controlClass =
-  "w-full rounded-md border border-white/15 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-white/50 outline-none transition-all duration-300 focus:border-rosso focus:bg-white/[0.05] focus:ring-1 focus:ring-rosso/60";
+  "w-full rounded-md border border-input bg-foreground/5 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-all duration-300 focus:border-rosso focus:bg-foreground/[0.08] focus:ring-1 focus:ring-rosso/60";
 
 export function Field({
   label,
@@ -69,7 +69,7 @@ export function SuccessPanel({
       <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-rosso/15 text-rosso">
         <CheckCircle2 className="h-7 w-7" />
       </span>
-      <h3 className="font-display text-2xl uppercase tracking-tight text-white">
+      <h3 className="font-display text-2xl uppercase tracking-tight text-foreground">
         {title}
       </h3>
       <p className="mt-3 max-w-sm text-sm text-muted-foreground">{message}</p>

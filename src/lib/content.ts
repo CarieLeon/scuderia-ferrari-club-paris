@@ -217,7 +217,7 @@ export const advantages: Advantage[] = [
   {
     title: "Welcome Kit officiel",
     description:
-      "À votre adhésion, recevez le coffret de bienvenue du club : carte de membre, goodies aux couleurs de la Scuderia et accès à l'espace membres.",
+      "À votre adhésion, recevez le coffret de bienvenue du club : carte de membre officiel, corde de cou et autocollant du club — plus un cadeau surprise qui change chaque année.",
   },
   {
     title: "Événements privés",
@@ -235,6 +235,14 @@ export const advantages: Advantage[] = [
       "Le statut de club officiel ouvre des opportunités privilégiées auprès de Ferrari et de son réseau partenaire.",
   },
 ];
+
+/* ------------------------------------------------------- Welcome Kit --- */
+
+/** Contenu du coffret de bienvenue remis à chaque adhésion (source : club). */
+export const welcomeKit = {
+  items: ["Carte de membre officiel", "Corde de cou", "Autocollant du club"],
+  surprise: "un cadeau qui change chaque année",
+};
 
 /* ----------------------------------------------- Membership formulas --- */
 

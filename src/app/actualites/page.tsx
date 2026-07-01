@@ -32,7 +32,7 @@ export default function ActualitesPage() {
             <Link
               href={`/actualites/${featured.slug}`}
               aria-label={`Lire l'article : ${featured.title}`}
-              className="group relative grid overflow-hidden rounded-xl border border-white/10 bg-card transition-all duration-300 hover:-translate-y-1 hover:border-rosso hover:shadow-[0_30px_70px_rgba(255,40,0,0.20)] lg:grid-cols-2"
+              className="group relative grid overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-rosso hover:shadow-[0_30px_70px_rgba(255,40,0,0.20)] lg:grid-cols-2"
             >
               {/* Cover */}
               <div className="relative aspect-[16/10] overflow-hidden lg:aspect-auto lg:h-full lg:min-h-[26rem]">
@@ -54,17 +54,17 @@ export default function ActualitesPage() {
               <div className="relative flex flex-col justify-center gap-6 p-8 md:p-12">
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold uppercase tracking-widest">
                   <span className="text-rosso">{featured.category}</span>
-                  <span className="text-white/20">·</span>
+                  <span className="text-foreground/20">·</span>
                   <span className="text-muted-foreground">
                     {featured.dateLabel}
                   </span>
-                  <span className="text-white/20">·</span>
+                  <span className="text-foreground/20">·</span>
                   <span className="text-muted-foreground">
                     {featured.readingTime} de lecture
                   </span>
                 </div>
 
-                <h2 className="display-title text-3xl leading-tight text-white transition-colors duration-300 group-hover:text-rosso sm:text-4xl lg:text-5xl">
+                <h2 className="display-title text-3xl leading-tight text-foreground transition-colors duration-300 group-hover:text-rosso sm:text-4xl lg:text-5xl">
                   {featured.title}
                 </h2>
 
@@ -93,7 +93,7 @@ export default function ActualitesPage() {
               <Link
                 href={`/actualites/${article.slug}`}
                 aria-label={`Lire l'article : ${article.title}`}
-                className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-white/10 bg-card transition-all duration-300 hover:-translate-y-1 hover:border-rosso hover:shadow-[0_20px_50px_rgba(255,40,0,0.18)]"
+                className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-rosso hover:shadow-[0_20px_50px_rgba(255,40,0,0.18)]"
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
@@ -109,17 +109,17 @@ export default function ActualitesPage() {
                 <div className="flex flex-1 flex-col gap-4 p-6">
                   <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[0.7rem] font-semibold uppercase tracking-widest">
                     <span className="text-rosso">{article.category}</span>
-                    <span className="text-white/20">·</span>
+                    <span className="text-foreground/20">·</span>
                     <span className="text-muted-foreground">
                       {article.dateLabel}
                     </span>
-                    <span className="text-white/20">·</span>
+                    <span className="text-foreground/20">·</span>
                     <span className="text-muted-foreground">
                       {article.readingTime}
                     </span>
                   </div>
 
-                  <h3 className="display-title text-2xl leading-tight text-white transition-colors duration-300 group-hover:text-rosso">
+                  <h3 className="display-title text-2xl leading-tight text-foreground transition-colors duration-300 group-hover:text-rosso">
                     {article.title}
                   </h3>
 

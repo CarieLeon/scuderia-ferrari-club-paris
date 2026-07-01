@@ -67,12 +67,12 @@ export default function Preloader() {
         >
           {/* Garage-door panels */}
           <motion.div
-            className="absolute inset-x-0 top-0 h-[50.5%] bg-ink"
+            className="absolute inset-x-0 top-0 h-[50.5%] bg-background"
             exit={{ y: "-100%" }}
             transition={{ duration: 1.05, ease: EASE_DOOR, delay: 0.12 }}
           />
           <motion.div
-            className="absolute inset-x-0 bottom-0 h-[50.5%] bg-ink"
+            className="absolute inset-x-0 bottom-0 h-[50.5%] bg-background"
             exit={{ y: "100%" }}
             transition={{ duration: 1.05, ease: EASE_DOOR, delay: 0.12 }}
           />
@@ -134,7 +134,7 @@ export default function Preloader() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="relative mt-12 h-[3px] w-60 overflow-visible rounded-full bg-white/12 sm:w-72"
+              className="relative mt-12 h-[3px] w-60 overflow-visible rounded-full bg-foreground/10 sm:w-72"
             >
               {/* Filled portion (GPU transform = smooth) */}
               <motion.div
@@ -155,7 +155,7 @@ export default function Preloader() {
               transition={{ delay: 0.4, duration: 0.6 }}
               className="mt-6 flex w-60 items-center justify-between sm:w-72"
             >
-              <span className="text-[10px] font-semibold uppercase tracking-[0.35em] text-white/40">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.35em] text-muted-foreground">
                 Chargement
               </span>
               <motion.span className="font-display text-base tabular-nums tracking-wide text-rosso">

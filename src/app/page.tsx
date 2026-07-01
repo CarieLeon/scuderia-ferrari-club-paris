@@ -83,7 +83,7 @@ export default function HomePage() {
                 className="absolute -bottom-4 -left-4 hidden h-24 w-24 rounded-bl-2xl border-b-2 border-l-2 border-rosso/60 sm:block"
               />
 
-              <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-white/10 bg-card shadow-[0_30px_80px_rgba(0,0,0,0.55)] transition-all duration-500 group-hover:border-rosso/50 group-hover:shadow-[0_30px_90px_rgba(255,40,0,0.22)]">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-border bg-card shadow-[0_30px_80px_rgba(0,0,0,0.55)] transition-all duration-500 group-hover:border-rosso/50 group-hover:shadow-[0_30px_90px_rgba(255,40,0,0.22)]">
                 <Image
                   src={groupPhoto}
                   alt="Membres du Scuderia Ferrari Club Paris réunis autour de leurs Ferrari"
@@ -109,7 +109,7 @@ export default function HomePage() {
       </section>
 
       {/* ----------------------------------------------------- Événements --- */}
-      <section className="bg-carbon-texture border-y border-white/5">
+      <section className="bg-carbon-texture border-y border-border">
         <div className="container py-24 md:py-32">
           <SectionHeading
             eyebrow="Temps forts"
@@ -126,7 +126,7 @@ export default function HomePage() {
               <Reveal key={event.slug} delay={i * 0.08} className="h-full">
                 <Link
                   href={`/evenements#${event.slug}`}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-white/10 bg-card transition-all duration-300 hover:-translate-y-1 hover:border-rosso hover:shadow-[0_20px_50px_rgba(255,40,0,0.18)]"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-rosso hover:shadow-[0_20px_50px_rgba(255,40,0,0.18)]"
                 >
                   {/* Cover */}
                   <div className="relative aspect-[4/3] overflow-hidden">
@@ -156,7 +156,7 @@ export default function HomePage() {
                       </span>
                     </div>
 
-                    <h3 className="mt-4 font-display text-2xl uppercase leading-tight tracking-tight text-white transition-colors duration-300 group-hover:text-rosso">
+                    <h3 className="mt-4 font-display text-2xl uppercase leading-tight tracking-tight text-foreground transition-colors duration-300 group-hover:text-rosso">
                       {event.title}
                     </h3>
 
@@ -209,10 +209,10 @@ export default function HomePage() {
       </section>
 
       {/* ------------------------------------------------ Devenir membre --- */}
-      <section className="relative overflow-hidden border-y border-white/10 bg-ink">
+      <section className="relative overflow-hidden border-y border-border bg-background">
         {/* Rosso radial glow */}
         <div className="absolute inset-0 bg-rosso-glow opacity-90" />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-transparent to-ink/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/80" />
         <div className="grain absolute inset-0" aria-hidden />
 
         <div className="container relative z-10 py-28 text-center md:py-36">
@@ -223,7 +223,7 @@ export default function HomePage() {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <h2 className="display-title mx-auto max-w-4xl text-4xl text-white sm:text-5xl lg:text-6xl">
+            <h2 className="display-title mx-auto max-w-4xl text-4xl text-foreground sm:text-5xl lg:text-6xl">
               Vivez la passion Ferrari,{" "}
               <span className="text-gradient-rosso">ensemble</span>
             </h2>
@@ -234,7 +234,7 @@ export default function HomePage() {
           </Reveal>
 
           <Reveal delay={0.22}>
-            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/75">
+            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
               Propriétaire d&apos;une Ferrari ou simplement animé par l&apos;amour
               du Cheval Cabré, le club vous ouvre ses portes. Welcome Kit officiel,
               événements privés et un réseau de passionnés vous attendent.

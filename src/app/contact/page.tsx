@@ -53,7 +53,7 @@ export default function ContactPage() {
           <div className="flex flex-col">
             <Reveal>
               <span className="eyebrow mb-5">Coordonnées</span>
-              <h2 className="display-title text-3xl text-white sm:text-4xl">
+              <h2 className="display-title text-3xl text-foreground sm:text-4xl">
                 Le <span className="text-gradient-rosso">Cheval Cabré</span> à
                 portée de voix
               </h2>
@@ -95,12 +95,12 @@ export default function ContactPage() {
                     {row.href ? (
                       <a
                         href={row.href}
-                        className="group flex items-center gap-4 rounded-lg border border-white/10 bg-card p-4 transition-all duration-300 hover:-translate-y-1 hover:border-rosso hover:shadow-[0_20px_50px_rgba(255,40,0,0.18)]"
+                        className="group flex items-center gap-4 rounded-lg border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-1 hover:border-rosso hover:shadow-[0_20px_50px_rgba(255,40,0,0.18)]"
                       >
                         {inner}
                       </a>
                     ) : (
-                      <div className="group flex items-center gap-4 rounded-lg border border-white/10 bg-card p-4">
+                      <div className="group flex items-center gap-4 rounded-lg border border-border bg-card p-4">
                         {inner}
                       </div>
                     )}
@@ -124,7 +124,7 @@ export default function ContactPage() {
 
             {/* Decorative carbon panel */}
             <Reveal delay={0.3} className="mt-auto pt-12">
-              <div className="grain relative overflow-hidden rounded-lg border border-white/10 bg-carbon-texture p-7">
+              <div className="grain relative overflow-hidden rounded-lg border border-border bg-carbon-texture p-7">
                 <div className="absolute inset-0 bg-rosso-glow opacity-40" />
                 <div className="relative">
                   <span className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gold">
@@ -147,7 +147,7 @@ export default function ContactPage() {
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-rosso to-transparent" />
               <CardHeader className="p-7 pb-2 sm:p-9 sm:pb-3">
                 <span className="eyebrow mb-3">Formulaire</span>
-                <CardTitle className="display-title text-2xl text-white sm:text-3xl">
+                <CardTitle className="display-title text-2xl text-foreground sm:text-3xl">
                   Envoyez-nous un message
                 </CardTitle>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">

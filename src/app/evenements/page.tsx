@@ -67,7 +67,7 @@ export default function EvenementsPage() {
                           <Calendar className="h-4 w-4 text-rosso" />
                           <time dateTime={event.date}>{event.dateLabel}</time>
                         </span>
-                        <span aria-hidden className="hidden text-white/20 sm:inline">
+                        <span aria-hidden className="hidden text-muted-foreground sm:inline">
                           ·
                         </span>
                         <span className="inline-flex items-center gap-2">
@@ -80,7 +80,7 @@ export default function EvenementsPage() {
                       </div>
 
                       {/* Title */}
-                      <h2 className="display-title mt-5 text-4xl text-white sm:text-5xl lg:text-6xl">
+                      <h2 className="display-title mt-5 text-4xl text-foreground sm:text-5xl lg:text-6xl">
                         {event.title}
                       </h2>
 
@@ -102,7 +102,7 @@ export default function EvenementsPage() {
                       {event.video && (
                         <div className="mt-12">
                           <span className="eyebrow mb-6">La vidéo</span>
-                          <div className="group relative overflow-hidden rounded-lg border border-white/10 bg-black shadow-[0_30px_80px_rgba(0,0,0,0.55)]">
+                          <div className="group relative overflow-hidden rounded-lg border border-border bg-black shadow-[0_30px_80px_rgba(0,0,0,0.55)]">
                             <video
                               controls
                               preload="metadata"
@@ -139,11 +139,11 @@ export default function EvenementsPage() {
       </section>
 
       {/* Closing CTA */}
-      <section className="border-t border-white/10 bg-ink">
+      <section className="border-t border-border bg-background">
         <div className="container py-24 text-center md:py-32">
           <Reveal>
             <span className="eyebrow justify-center">Vivez l'aventure</span>
-            <h2 className="display-title mx-auto mt-5 max-w-3xl text-4xl text-white sm:text-5xl lg:text-6xl">
+            <h2 className="display-title mx-auto mt-5 max-w-3xl text-4xl text-foreground sm:text-5xl lg:text-6xl">
               Et si le prochain souvenir était <span className="text-gradient-rosso">le vôtre</span> ?
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">

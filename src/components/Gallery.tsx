@@ -119,7 +119,7 @@ export default function Gallery({
                 "rounded-full border px-5 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-300",
                 activeCat === cat.key
                   ? "border-rosso bg-rosso text-white"
-                  : "border-white/15 text-white/60 hover:border-white/40 hover:text-white",
+                  : "border-border text-muted-foreground hover:border-border hover:text-foreground",
               )}
             >
               {cat.label}
@@ -165,7 +165,7 @@ export default function Gallery({
           <button
             type="button"
             onClick={() => setVisible((v) => v + (pageSize ?? 12))}
-            className="rounded-full border border-white/20 px-8 py-3 text-xs font-semibold uppercase tracking-widest text-white transition-all duration-300 hover:border-rosso hover:bg-rosso"
+            className="rounded-full border border-border px-8 py-3 text-xs font-semibold uppercase tracking-widest text-foreground transition-all duration-300 hover:border-rosso hover:bg-rosso hover:text-white"
           >
             Voir plus de photos
           </button>
@@ -275,7 +275,7 @@ function GalleryTile({
       type="button"
       onClick={onOpen}
       className={cn(
-        "group relative block w-full overflow-hidden rounded-md border border-white/10 bg-carbon",
+        "group relative block w-full overflow-hidden rounded-md border border-border bg-carbon",
         masonry ? "break-inside-avoid" : "aspect-square",
       )}
     >
