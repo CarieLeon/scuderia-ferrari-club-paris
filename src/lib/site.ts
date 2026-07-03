@@ -29,6 +29,7 @@ export const navItems: NavItem[] = [
   { label: "Galerie", href: "/galerie" },
   { label: "Événements", href: "/evenements" },
   { label: "Actualités", href: "/actualites" },
+  { label: "Partenaires", href: "/partenaires" },
   { label: "Contact", href: "/contact" },
 ];
 

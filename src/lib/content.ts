@@ -325,6 +325,33 @@ export const membershipInfo = {
   ],
 };
 
+/* --------------------------------------------------------- Partenaires --- */
+
+export type Partner = {
+  name: string;
+  logo: string;
+  /** Site web du partenaire (ouvert dans un nouvel onglet). Absent si non communiqué. */
+  url?: string;
+};
+
+/** Partenaires du club (source : page officielle scuderia-ferrari-club.fr/partenaires/). */
+export const partners: Partner[] = [
+  {
+    name: "Assurances Allavoine",
+    logo: "/images/partenaires/allavoine.jpg",
+  },
+  {
+    name: "Fernand Bachmann",
+    logo: "/images/partenaires/fernand-bachmann.jpg",
+    url: "https://www.fernandbachmann.com/fr/",
+  },
+  {
+    name: "Hôtels Barrière",
+    logo: "/images/partenaires/barriere-black.svg",
+    url: "https://www.hotelsbarriere.com/fr.html",
+  },
+];
+
 /* ------------------------------------------------------- Club narrative --- */
 
 export const clubStory = {
