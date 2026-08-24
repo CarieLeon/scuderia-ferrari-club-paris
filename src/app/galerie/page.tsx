@@ -8,7 +8,7 @@ import PageHeader from "@/components/PageHeader";
 export const metadata: Metadata = {
   title: "Galerie",
   description:
-    "Découvrez en images les rassemblements, week-ends et soirées de la Scuderia Ferrari Club Paris : Ferrari de légende, membres passionnés et moments d'exception.",
+    "Les rassemblements, week-ends et soirées du Scuderia Ferrari Club Paris en images : Ferrari de légende et moments d'exception.",
 };
 
 export default function GaleriePage() {

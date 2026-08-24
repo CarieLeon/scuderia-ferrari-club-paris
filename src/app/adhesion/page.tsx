@@ -30,7 +30,7 @@ import { heroImages, membresImages } from "@/lib/images";
 export const metadata: Metadata = {
   title: "Adhésion",
   description:
-    "Devenez membre du Scuderia Ferrari Club Paris, club officiel. Formules 2026, avantages, welcome kit et formulaire d'adhésion en ligne pour vivre la passion Ferrari.",
+    "Devenez membre du Scuderia Ferrari Club Paris, club officiel. Formules 2026, avantages, welcome kit et adhésion en ligne.",
 };
 
 const advantageIcons: LucideIcon[] = [Gift, Calendar, Users, BadgeCheck];

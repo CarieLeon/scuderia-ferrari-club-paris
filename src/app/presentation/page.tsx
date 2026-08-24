@@ -35,7 +35,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Présentation",
   description:
-    "Découvrez le Scuderia Ferrari Club Paris : notre histoire, nos valeurs, notre équipe et les rassemblements qui font vibrer la communauté du Cheval Cabré depuis 2010.",
+    "Le Scuderia Ferrari Club Paris : notre histoire, nos valeurs et les rassemblements qui animent la communauté du Cheval Cabré depuis 2010.",
 };
 
 const valueIcons = [Heart, Users, Trophy, Star] as const;

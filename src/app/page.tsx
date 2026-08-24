@@ -17,7 +17,7 @@ import {
 } from "@/lib/images";
 
 export const metadata: Metadata = {
-  title: "Accueil",
+  title: "Scuderia Ferrari Club Paris — Club officiel Ferrari",
   description:
     "Scuderia Ferrari Club Paris, club officiel Ferrari. Rassemblements, week-ends d'exception et soirées privées pour les passionnés du Cheval Cabré.",
 };
