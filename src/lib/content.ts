@@ -337,6 +337,11 @@ export type Partner = {
 /** Partenaires du club (source : page officielle scuderia-ferrari-club.fr/partenaires/). */
 export const partners: Partner[] = [
   {
+    name: "Charles Pozzi",
+    logo: "/images/partenaires/charles-pozzi.png",
+    url: "https://www.charles-pozzi.fr/",
+  },
+  {
     name: "Assurances Allavoine",
     logo: "/images/partenaires/allavoine.jpg",
   },
