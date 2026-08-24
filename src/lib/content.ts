@@ -350,6 +350,20 @@ export const partners: Partner[] = [
     logo: "/images/partenaires/barriere-black.svg",
     url: "https://www.hotelsbarriere.com/fr.html",
   },
+  {
+    name: "Champagne G.H. Mumm",
+    logo: "/images/partenaires/gh-mumm.png",
+    url: "https://www.mumm.com/",
+  },
+  {
+    name: "Champagne Perrier-Jouët",
+    logo: "/images/partenaires/perrier-jouet.png",
+  },
+  {
+    name: "Château Sainte Marguerite",
+    logo: "/images/partenaires/chateau-sainte-marguerite.png",
+    url: "https://chateausaintemarguerite.com/",
+  },
 ];
 
 /* ------------------------------------------------------- Club narrative --- */
