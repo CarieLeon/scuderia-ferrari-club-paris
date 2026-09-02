@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  Award,
   Heart,
   Sparkles,
   Star,
@@ -109,7 +108,7 @@ export default function PresentationPage() {
 
             <Reveal
               delay={0.3}
-              className="mt-10 flex flex-wrap items-center gap-8 border-t border-border pt-8"
+              className="mt-10 border-t border-border pt-8"
             >
               <div>
                 <p className="font-display text-4xl uppercase leading-none text-foreground sm:text-5xl">
@@ -118,15 +117,6 @@ export default function PresentationPage() {
                 <p className="mt-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
                   Année de fondation
                 </p>
-              </div>
-              <div className="hidden h-12 w-px bg-gradient-to-b from-transparent via-border to-transparent sm:block" />
-              <div className="flex items-center gap-3">
-                <Award className="h-9 w-9 shrink-0 text-rosso" aria-hidden />
-                <div>
-                  <p className="font-display text-lg uppercase leading-none text-foreground">
-                    Club officiel Ferrari
-                  </p>
-                </div>
               </div>
             </Reveal>
           </div>
