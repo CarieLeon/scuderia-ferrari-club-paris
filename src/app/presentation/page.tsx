@@ -19,7 +19,6 @@ import { Button } from "@/components/ui/button";
 import {
   clubStory,
   events,
-  stats,
   teamMembers,
   values,
 } from "@/lib/content";
@@ -127,9 +126,6 @@ export default function PresentationPage() {
                   <p className="font-display text-lg uppercase leading-none text-foreground">
                     Club officiel Ferrari
                   </p>
-                  <p className="mt-1.5 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                    Reconnu par la marque
-                  </p>
                 </div>
               </div>
             </Reveal>
@@ -194,40 +190,6 @@ export default function PresentationPage() {
                 </Reveal>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------ Chiffres clés --- */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-background" />
-        <div className="absolute inset-0 bg-rosso-glow opacity-40" />
-        <div className="container relative z-10 py-20 md:py-24">
-          <Reveal className="mx-auto mb-14 max-w-2xl text-center">
-            <span className="eyebrow mb-4 justify-center">En quelques chiffres</span>
-            <h2 className="display-title text-3xl text-foreground sm:text-4xl">
-              Chiffres clés
-            </h2>
-          </Reveal>
-
-          <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-3">
-            {stats.map((stat, i) => (
-              <Reveal
-                key={stat.label}
-                delay={i * 0.08}
-                className="relative px-4 text-center sm:px-6"
-              >
-                {i > 0 && (
-                  <span className="absolute left-0 top-1/2 hidden h-16 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-border to-transparent sm:block" />
-                )}
-                <span className="block font-display text-5xl uppercase leading-none text-gradient-rosso sm:text-6xl lg:text-7xl">
-                  {stat.value}
-                </span>
-                <p className="mt-4 text-xs uppercase tracking-[0.2em] text-muted-foreground sm:text-sm">
-                  {stat.label}
-                </p>
-              </Reveal>
-            ))}
           </div>
         </div>
       </section>

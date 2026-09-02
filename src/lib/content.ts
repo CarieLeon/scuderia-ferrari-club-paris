@@ -1,5 +1,5 @@
 /**
- * Editorial content — events, articles, team, stats, club values and
+ * Editorial content — events, articles, team, club values and
  * membership benefits. All copy is in French. Pages consume this directly.
  */
 
@@ -172,15 +172,6 @@ export const teamMembers: TeamMember[] = [
 ];
 
 /* ----------------------------------------------------------- Key figures --- */
-
-export type Stat = { value: string; label: string };
-
-/** Repères vérifiés (source : page officielle « Présentation »). */
-export const stats: Stat[] = [
-  { value: "2010", label: "Année de création" },
-  { value: "2012", label: "Reconnu officiel par Ferrari" },
-  { value: "1er", label: "Club Ferrari de France" },
-];
 
 /* --------------------------------------------------------------- Values --- */
 
