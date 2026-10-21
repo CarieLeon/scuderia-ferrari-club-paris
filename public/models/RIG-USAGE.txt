@@ -1,18 +1,17 @@
-File: ferrari-458-rigged.glb (Draco compressed, 2026-10-21)
-Visual QA: 458-rig-open.png. Blender source: ferrari-458-rigged.blend.
-Source processing script: rig_ferrari.py. All meshes are original Ferrari example geometry.
+FERRARI F40 — SCROLL RIG
 
-Coordinates in GLTF/Three: X width, Y up, Z length; front is negative Z.
-All four named hinges have identity rotation in the closed pose.
+Source and license: see ATTRIBUTION.txt.
+Rebuild with Blender 4.1+: blender -b --python scripts/prepare-f40-rig.py -- <source.glb> <output.glb>
+The source GLB is available at https://sceneview.github.io/models/platforms/ferrari_f40.glb
 
-hinge_left: position (-0.79, 0.62, -0.72), conventional side opening, rotation.y = -1.05 rad at full opening.
-hinge_right: position (0.79, 0.62, -0.72), conventional side opening, rotation.y = +1.05 rad at full opening.
-hinge_front: position (0, 0.73, -0.88), front bonnet attached near windshield, rotation.x = +0.85 rad at full opening.
-hinge_rear: position (0, 0.95, 2.15), rear engine/deck cover attached at its rear edge, rotation.x = +1.37 rad at full opening. Includes matching original underside liners; updated after raycast verification so the engine area is uncovered from above.
+The exported glTF is Y-up; nose along negative Z; closed hinges use identity rotation.
+Opening angles in radians:
+- hinge_left: rotation.y = -1.08
+- hinge_right: rotation.y = +1.08
+- hinge_front: rotation.x = -1.0
+- hinge_rear: rotation.x = +1.1
 
-Door assemblies include actual loose exterior panels, mirrors, handles, inner skin and trim. The original asset has no raised side-window glass. The rear cavity has incomplete/illustrative interior geometry and no detailed engine; root implementation should add an illustrative V8 if it is visible close up.
-
-wheel_fl, wheel_fr, wheel_rl, wheel_rr groups remain intact.
-steering_wheel group remains intact.
-Meshes retain original material names. Recolor all meshes with material.name === 'Body_Color', rather than relying on one object named body.
-Asset original title Ferrari 458 Italia from three.js; visually its roof is open (Spider appearance).
+Original 245,552 triangles, authored split normals and UVs retained. Physical panel
+partitions derived from source indexed topology, without welding or decimation.
+Cockpit, V8 and suspension are part of the original model.
+Fallback poster is a native Blender render of this same F40.

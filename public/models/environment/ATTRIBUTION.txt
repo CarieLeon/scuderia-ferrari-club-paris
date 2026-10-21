@@ -1,0 +1,9 @@
+Studio Small 05 HDRI
+Author: Greg Zaal / Poly Haven
+Asset: https://polyhaven.com/a/studio_small_05
+Download: https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_05_1k.hdr
+License: Creative Commons CC0 1.0 Universal
+License reference: https://polyhaven.com/license
+Official API metadata: https://api.polyhaven.com/files/studio_small_05
+Downloaded 2026-10-21. Official expected MD5: a9ce891607110a268fdcc8f09742d5c8
+This HDRI may be used, modified and redistributed commercially under CC0. The Poly Haven preview render is not included.

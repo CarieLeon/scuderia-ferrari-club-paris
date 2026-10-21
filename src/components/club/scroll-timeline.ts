@@ -20,7 +20,7 @@ export function scrollPose(progress: number, reducedMotion = false) {
     camera: {
       x: (-6.5 + 1.9 * orbit) * (1 - overhead),
       y: 2.05 + 1.7 * orbit + 4.1 * overhead,
-      z: 0.15 + 4.65 * orbit * (1 - overhead),
+      z: (-1.4 + 6.2 * orbit) * (1 - overhead),
     },
   };
 }

@@ -23,41 +23,36 @@ export default function CarScene({ progress, reducedMotion, onReady, onError }: 
     let cleanup = () => {};
     let frame = 0;
     const init = async () => {
-      const [THREE, { GLTFLoader }, { DRACOLoader }, { RoomEnvironment }, { Reflector }, { default: createEngine }] = await Promise.all([
+      const [THREE, { GLTFLoader }, { DRACOLoader }, { HDRLoader }, { Reflector }] = await Promise.all([
         import("three"),
         import("three/addons/loaders/GLTFLoader.js"),
         import("three/addons/loaders/DRACOLoader.js"),
-        import("three/addons/environments/RoomEnvironment.js"),
+        import("three/addons/loaders/HDRLoader.js"),
         import("three/addons/objects/Reflector.js"),
-        import("./createEngine"),
       ]);
       if (disposed) return;
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 700 ? 1.5 : 1.8));
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 0.95;
+      renderer.toneMappingExposure = 1.0;
       renderer.setClearColor(0x000000, 0);
-      renderer.domElement.setAttribute("aria-label", "Ferrari 458 en 3D : rotation, ouverture des portes et capots, puis vue du dessus pilotées par le défilement");
+      renderer.domElement.setAttribute("aria-label", "Ferrari F40 en 3D : rotation, ouverture des portes et capots, puis vue du dessus pilotées par le défilement");
       renderer.domElement.setAttribute("role", "img");
       container.appendChild(renderer.domElement);
       const scene = new THREE.Scene();
       scene.fog = new THREE.Fog(0x171a19, 13, 38);
       const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 70);
       const pmrem = new THREE.PMREMGenerator(renderer);
-      const room = new RoomEnvironment();
-      const environment = pmrem.fromScene(room, 0.04);
-      scene.environment = environment.texture;
-      scene.environmentIntensity = 0.9;
-      room.dispose();
-      scene.add(new THREE.HemisphereLight(0xf9f5ef, 0x28282a, 1.1));
-      const key = new THREE.DirectionalLight(0xfffaf2, 2.5);
+      let environment: ReturnType<typeof pmrem.fromEquirectangular> | undefined;
+      scene.add(new THREE.HemisphereLight(0xf9f5ef, 0x181819, 0.2));
+      const key = new THREE.DirectionalLight(0xffffff, 2.4);
       key.position.set(-4, 7, -4);
       scene.add(key);
-      const fill = new THREE.DirectionalLight(0xb5d3f1, 1.3);
+      const fill = new THREE.DirectionalLight(0xe7edff, 0.55);
       fill.position.set(4, 3, 3);
       scene.add(fill);
-      const red = new THREE.PointLight(0xf11731, 24, 14, 2);
+      const red = new THREE.PointLight(0xf11731, 6, 14, 2);
       red.position.set(-4, 1.5, 2);
       scene.add(red);
       const floorGeometry = new THREE.PlaneGeometry(70, 70);
@@ -71,7 +66,7 @@ export default function CarScene({ progress, reducedMotion, onReady, onError }: 
       floor.rotation.x = -Math.PI / 2;
       floor.position.y = -0.025;
       scene.add(floor);
-      const floorVeil = new THREE.Mesh(new THREE.PlaneGeometry(70, 70), new THREE.MeshBasicMaterial({ color: 0x1a1e1c, transparent: true, opacity: 0.73, depthWrite: false }));
+      const floorVeil = new THREE.Mesh(new THREE.PlaneGeometry(70, 70), new THREE.MeshBasicMaterial({ color: 0x1a1e1c, transparent: true, opacity: 0.73, depthWrite: false, toneMapped: false }));
       floorVeil.rotation.x = -Math.PI / 2;
       floorVeil.position.y = -0.015;
       scene.add(floorVeil);
@@ -79,6 +74,7 @@ export default function CarScene({ progress, reducedMotion, onReady, onError }: 
       let visibility: IntersectionObserver | undefined;
       let shadowTexture: InstanceType<typeof THREE.Texture> | undefined;
       const draco = new DRACOLoader();
+      const replacedMaterials = new Set<InstanceType<typeof THREE.Material>>();
       let cleaned = false;
       const releaseObject = (root: InstanceType<typeof THREE.Object3D>) => {
         const geometries = new Set<InstanceType<typeof THREE.BufferGeometry>>();
@@ -92,7 +88,7 @@ export default function CarScene({ progress, reducedMotion, onReady, onError }: 
         geometries.forEach(geometry => geometry.dispose());
         materials.forEach(material => material.dispose());
       };
-      const contextLost = (event: Event) => { event.preventDefault(); if (!disposed) { cleanup(); onError(); } };
+      const contextLost = (event: Event) => { event.preventDefault(); if (!disposed) { disposed = true; cleanup(); onError(); } };
       renderer.domElement.addEventListener("webglcontextlost", contextLost);
       cleanup = () => {
         if (cleaned) return;
@@ -101,45 +97,59 @@ export default function CarScene({ progress, reducedMotion, onReady, onError }: 
         observer?.disconnect(); visibility?.disconnect();
         renderer.domElement.removeEventListener("webglcontextlost", contextLost);
         releaseObject(scene);
+        replacedMaterials.forEach(material => material.dispose());
         shadowTexture?.dispose(); floor.getRenderTarget().dispose();
-        environment.dispose(); pmrem.dispose(); draco.dispose(); renderer.dispose();
+        environment?.dispose(); pmrem.dispose(); draco.dispose(); renderer.dispose();
         renderer.domElement.remove();
       };
-      shadowTexture = await new THREE.TextureLoader().loadAsync("/models/ferrari-ao.png");
-      if (disposed) { shadowTexture.dispose(); return; }
-      const shadow = new THREE.Mesh(new THREE.PlaneGeometry(4.9, 5.5), new THREE.MeshBasicMaterial({ map: shadowTexture, transparent: true, opacity: 0.65, depthWrite: false, blending: THREE.MultiplyBlending, premultipliedAlpha: true, toneMapped: false }));
+      const hdr = await new HDRLoader().loadAsync("/models/environment/studio-small-05-1k.hdr");
+      if (disposed) { hdr.dispose(); return; }
+      environment = pmrem.fromEquirectangular(hdr);
+      hdr.dispose();
+      scene.environment = environment.texture;
+      scene.environmentIntensity = 1.1;
+      scene.environmentRotation.y = 2.3;
+      const shadowCanvas = document.createElement("canvas");
+      shadowCanvas.width = shadowCanvas.height = 256;
+      const shadowContext = shadowCanvas.getContext("2d")!;
+      const contact = shadowContext.createRadialGradient(128, 128, 20, 128, 128, 126);
+      contact.addColorStop(0, "rgba(0,0,0,0.65)");
+      contact.addColorStop(0.55, "rgba(0,0,0,0.35)");
+      contact.addColorStop(1, "rgba(0,0,0,0)");
+      shadowContext.fillStyle = contact;
+      shadowContext.fillRect(0, 0, 256, 256);
+      shadowTexture = new THREE.CanvasTexture(shadowCanvas);
+      const shadow = new THREE.Mesh(new THREE.PlaneGeometry(3.4, 6), new THREE.MeshBasicMaterial({ map: shadowTexture, transparent: true, opacity: 0.65, depthWrite: false, blending: THREE.MultiplyBlending, premultipliedAlpha: true, toneMapped: false }));
       shadow.rotation.x = -Math.PI / 2;
       shadow.position.y = -0.006;
       scene.add(shadow);
       draco.setDecoderPath("/models/draco/");
       const loader = new GLTFLoader().setDRACOLoader(draco);
-      const gltf = await loader.loadAsync("/models/ferrari-458-rigged.glb");
+      const gltf = await loader.loadAsync("/models/ferrari-f40-rigged.glb");
       if (disposed) {
         releaseObject(gltf.scene);
         return;
       }
       const car = gltf.scene;
       car.name = "scroll-ferrari";
-      const paint = new THREE.MeshPhysicalMaterial({ color: 0xd20b20, metalness: 0.65, roughness: 0.28, clearcoat: 0.85, clearcoatRoughness: 0.2 });
+      const paint = new THREE.MeshPhysicalMaterial({ color: 0xd7070c, metalness: 0.05, roughness: 0.24, clearcoat: 1, clearcoatRoughness: 0.12 });
       const dark = new THREE.MeshStandardMaterial({ color: 0x141618, metalness: 0.25, roughness: 0.5 });
-      const tire = new THREE.MeshStandardMaterial({ color: 0x0b0c0d, metalness: 0.05, roughness: 0.85 });
-      const steel = new THREE.MeshStandardMaterial({ color: 0x8e979e, metalness: 0.9, roughness: 0.27 });
-      const glass = new THREE.MeshPhysicalMaterial({ color: 0x293c42, metalness: 0, roughness: 0.1, transparent: true, opacity: 0.38, side: THREE.DoubleSide, depthWrite: false });
+      const glass = new THREE.MeshPhysicalMaterial({ color: 0x293c42, metalness: 0, roughness: 0.1, transparent: true, opacity: 0.3, side: THREE.DoubleSide, depthWrite: false });
       car.traverse(object => {
         if (!(object instanceof THREE.Mesh)) return;
         const material = Array.isArray(object.material) ? object.material[0] : object.material;
         const name = material.name.toLowerCase();
-        if (name === "body_color") object.material = paint;
-        else if (name.includes("interior") || name.includes("carbon") || name.includes("carpet") || name.includes("plastic") || name.includes("leather")) object.material = dark;
-        else if (name.includes("tire")) object.material = tire;
-        else if (name.includes("metal")) object.material = steel;
-        else if (name === "glass_gray" || name === "projector_glass") object.material = glass;
-        object.geometry.computeVertexNormals();
+        if (name === "material") object.material = paint;
+        else if (name.includes("cockpit") || name.includes("interior") || name.includes("carbon") || name.includes("carpet") || name.includes("plastic") || name.includes("leather")) object.material = dark;
+        else if (name.includes("window") || name.includes("glass") || name === "f40_headlights") object.material = glass;
+        else if (material instanceof THREE.MeshStandardMaterial) {
+          // Preserve the detailed source's distinct brakes, rims, seats and engine.
+          material.roughness = Math.max(material.roughness, name.includes("mechanics") ? 0.28 : 0.16);
+          if (name.includes("mechanics.001")) material.metalness = 0.12;
+        }
+        if (object.material !== material) replacedMaterials.add(material);
         object.geometry.computeBoundingBox();
       });
-      const engine = createEngine();
-      engine.position.y = 0.12;
-      car.add(engine);
       scene.add(car);
       const hinges = {
         left: car.getObjectByName("hinge_left"),
@@ -195,11 +205,10 @@ export default function CarScene({ progress, reducedMotion, onReady, onError }: 
         last = eased;
         dirty = false;
         const pose = scrollPose(eased, reduce.current);
-        engine.visible = pose.opening > 0.22;
         hinges.left!.rotation.y = -pose.opening * 1.08;
         hinges.right!.rotation.y = pose.opening * 1.08;
-        hinges.front!.rotation.x = pose.opening * 1.12;
-        hinges.rear!.rotation.x = -pose.opening * 1.128;
+        hinges.front!.rotation.x = -pose.opening * 1.0;
+        hinges.rear!.rotation.x = pose.opening * 1.1;
         car.updateMatrixWorld(true);
         camera.position.set(pose.camera.x, pose.camera.y, pose.camera.z).add(target);
         camera.up.set(0, Math.cos(pose.overhead * Math.PI / 2), -Math.sin(pose.overhead * Math.PI / 2));
@@ -213,17 +222,22 @@ export default function CarScene({ progress, reducedMotion, onReady, onError }: 
           for (let mask = 0; mask < 8; mask++) {
             corner.set(mask & 1 ? bounds.max.x : bounds.min.x, mask & 2 ? bounds.max.y : bounds.min.y, mask & 4 ? bounds.max.z : bounds.min.z).applyMatrix4(mesh.matrixWorld).project(camera);
             horizontal = Math.max(horizontal, Math.abs(corner.x));
-            vertical = Math.max(vertical, Math.abs(corner.y - 0.11));
+            vertical = Math.max(vertical, Math.abs(corner.y + 0.11));
           }
         }
-        const fit = Math.max(1, horizontal / 0.88, vertical / (camera.aspect < 0.8 ? 0.45 : 0.72));
+        const portrait = camera.aspect < 0.8;
+        // Art-directed close framing: side profile can extend beyond a phone's edges.
+        const widthLimit = portrait ? THREE.MathUtils.lerp(1.3, 1.18, pose.orbit) : THREE.MathUtils.lerp(1.0, 0.98, pose.orbit);
+        const heightLimit = portrait ? THREE.MathUtils.lerp(0.5, 0.65 - 0.13 * pose.overhead, pose.orbit) : THREE.MathUtils.lerp(0.7, 0.72 + 0.13 * pose.overhead, pose.orbit);
+        const fit = THREE.MathUtils.clamp(Math.max(horizontal / widthLimit, vertical / heightLimit), 0.52, 2.8);
         position.copy(camera.position).sub(target).multiplyScalar(fit);
         camera.position.copy(target).add(position);
         camera.lookAt(target);
         camera.updateMatrixWorld();
-        red.intensity = 24 * (1 - 0.7 * pose.overhead);
+        red.intensity = 6 * (1 - 0.7 * pose.overhead);
         floorVeil.material.opacity = 0.78 + 0.04 * pose.overhead;
         floorVeil.material.color.lerpColors(floorStart, floorEnd, pose.overhead);
+        renderer.domElement.dataset.framing = [horizontal, vertical, fit, camera.position.distanceTo(target)].map(value => value.toFixed(3)).join(",");
         renderer.domElement.dataset.progress = pose.progress.toFixed(4);
         renderer.domElement.dataset.opening = pose.opening.toFixed(4);
         renderer.domElement.dataset.overhead = pose.overhead.toFixed(4);
@@ -233,7 +247,7 @@ export default function CarScene({ progress, reducedMotion, onReady, onError }: 
       };
       frame = window.requestAnimationFrame(render);
     };
-    init().catch(() => { if (!disposed) { cleanup(); onError(); } });
+    init().catch(() => { if (!disposed) { disposed = true; cleanup(); onError(); } });
     return () => { disposed = true; window.cancelAnimationFrame(frame); cleanup(); };
   }, [progress, onReady, onError]);
 

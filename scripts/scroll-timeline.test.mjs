@@ -52,12 +52,16 @@ test('mechanical opening and camera ascent have deliberate holds between transit
 });
 
 test('the shipped car contains all four articulated hinges and uses a local Draco decoder', () => {
-  const buffer = readFileSync(new URL('../public/models/ferrari-458-rigged.glb', import.meta.url));
+  const buffer = readFileSync(new URL('../public/models/ferrari-f40-rigged.glb', import.meta.url));
   assert.equal(buffer.subarray(0,4).toString(), 'glTF');
   const jsonLength = buffer.readUInt32LE(12);
   const gltf = JSON.parse(buffer.subarray(20,20 + jsonLength).toString());
   for (const name of ['hinge_left','hinge_right','hinge_front','hinge_rear']) {
     assert.ok(gltf.nodes.some(node => node.name === name && node.children?.length));
   }
+  const primitives = gltf.meshes.flatMap(mesh => mesh.primitives);
+  assert.equal(primitives.reduce((sum, primitive) => sum + gltf.accessors[primitive.indices].count / 3, 0), 245552);
+  assert.ok(primitives.every(primitive => primitive.attributes.NORMAL !== undefined));
+  assert.ok(gltf.materials.some(material => material.name === 'F40_Mechanics.001'));
   assert.ok(readFileSync(new URL('../public/models/draco/draco_decoder.wasm', import.meta.url)).length > 10000);
 });
