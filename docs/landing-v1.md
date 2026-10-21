@@ -4,7 +4,7 @@ La nouvelle page d’accueil suit la vidéo de référence : rouge laqué, studi
 
 ## Parcours
 
-- Introduction en trois chapitres contrôlés par les boutons et les indicateurs.
+- Scène automobile 3D épinglée au scroll : profil fermé, rotation en trois quarts avec ouverture réelle des portes et capots, puis caméra du dessus sur un moteur illustratif. Séquence entièrement réversible et étapes cliquables.
 - Histoire courte, expériences, galerie et accès aux pages existantes.
 - Trois produits concept avec visuels générés, prix illustratifs et panier local.
 - Menu mobile, FAQ, navigation clavier et respect du mouvement réduit.
@@ -41,3 +41,16 @@ Prompt hero : « Use case: ads-marketing. Asset type: high-end automotive club w
 Build de production local et Vercel réussis. Contrôle navigateur à 1440 × 950 et 390 × 844 : chapitres, ancres, menu mobile, FAQ, absence de débordement horizontal, ajout des trois produits, quantités, total, persistance après rechargement, suppression et simulation. Relecture indépendante du code et correction du contraste des textes secondaires.
 
 La prévisualisation conserve la protection Vercel existante et demande une connexion. La production n’a pas été remplacée.
+
+
+## Correction du mouvement au scroll — V2
+
+La première version ne reproduisait pas la mécanique centrale de la vidéo. Le carrousel de photographies a été remplacé par une scène Three.js pilotée par la position du scroll, sur 4,2 hauteurs d’écran (3,9 sur mobile). La voiture reste épinglée dans le viewport pendant la progression.
+
+Le modèle utilisé est une Ferrari 458 issue de l’exemple officiel three.js, crédité à vicent091036 ; il ne s’agit pas de l’Enzo de la vidéo. Les vraies surfaces des portières, du capot avant et du capot arrière ont été séparées et articulées. Une caméra orbitale passe du profil à une vue arrière de trois quarts, puis monte à la verticale. Un V8 illustratif complète la cavité moteur du modèle, sans prétendre documenter précisément les pièces Ferrari. Le script de préparation du rig est conservé avec sa documentation.
+
+Les transformations dépendent uniquement du scroll : l’utilisateur peut s’arrêter au milieu de l’ouverture ou revenir à la pose fermée. La scène respecte le mouvement réduit en passant par trois poses fixes. Le modèle et le décodeur Draco sont servis localement, avec un repli statique en cas d’absence de WebGL. Le moteur de rendu s’arrête hors écran et ne redessine pas une pose immobile.
+
+Attribution et transformations du modèle : `public/models/ATTRIBUTION.txt` et `public/models/RIG-USAGE.txt`. Tests : `npm run test:scroll` (Node24+), puis `npm run build`.
+
+Validation V2 : six tests automatisés de progression et de rig passent ; compilation des 17 routes réussie. Tests visuels du build de production à 1440×950, 390×844 et 844×390 : maintien de la scène, portes/capots, moteur dégagé, retour au profil fermé, navigation vers les sections et commandes visibles en paysage.

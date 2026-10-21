@@ -2,18 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Menu, Minus, Plus, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Menu, Minus, Plus, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { CartButton, CartProvider } from "./CartProvider";
 import Shop from "./Shop";
+import ScrollCarHero from "./ScrollCarHero";
 import styles from "./ClubLanding.module.css";
-
-const chapters = [
-  { number: "01", name: "La passion", label: "L’ITALIE AU CŒUR.", title: "PARIS EN ROUGE.", note: "Un emblème italien.\nUne histoire à vivre ensemble.", image: "/images/club-v1/enzo-studio.webp", alt: "Ferrari Enzo rouge mise en scène sur un sol sombre et réfléchissant" },
-  { number: "02", name: "Les rencontres", label: "DES ROUTES À PARTAGER.", title: "DES LIENS À CRÉER.", note: "Le plaisir de la route.\nLa force du collectif.", image: "/images/hero/IMG_8668-scaled.jpg", alt: "Les Ferrari du club réunies à Paris, près de la tour Eiffel" },
-  { number: "03", name: "L’art de vivre", label: "LA PASSION NOUS RÉUNIT.", title: "LE PLAISIR AUSSI.", note: "Des lieux singuliers.\nDes moments qui restent.", image: "/images/champagne-2016/1-Week-end-Champagne-2016-Scuderia-Ferrari-Club.jpg", alt: "Les membres du club réunis sur une terrasse lors du week-end en Champagne" },
-];
 
 const experiences = [
   { number: "01", category: "SUR LA ROUTE", title: "L’échappée belle.", text: "Sortir de Paris. Suivre une belle route. Partager le plaisir de conduire, tout simplement.", image: "/images/hero/IMG_8668-scaled.jpg", alt: "Ferrari du club en balade dans Paris", href: "/evenements#rassemblement-ferrari-3", tag: "Rassemblements & escapades" },
@@ -68,31 +63,6 @@ function LandingHeader() {
   </header>;
 }
 
-function Hero() {
-  const [chapter, setChapter] = useState(0);
-  const current = chapters[chapter];
-  const next = () => setChapter(value => (value + 1) % chapters.length);
-  const previous = () => setChapter(value => (value + chapters.length - 1) % chapters.length);
-  return <section className={`${styles.hero} ${chapter > 0 ? styles.heroPhoto : ""}`} aria-label="Bienvenue au Scuderia Ferrari Club Paris" aria-roledescription="carrousel">
-    <div className={styles.heroVisual} key={current.image}><Image src={current.image} alt={current.alt} fill priority sizes="100vw" quality={90} className={styles.heroImage} /></div>
-    <div className={styles.heroShade} />
-    <div className={styles.heroTopline}><span><i /> SCUDERIA FERRARI CLUB PARIS</span><span>48°51′ N &nbsp; 2°21′ E</span></div>
-    <div className={styles.heroCopy} aria-live="polite" aria-atomic="true">
-      <h1 key={chapter}><span>{current.label}</span><strong>{current.title}</strong></h1>
-      <p>La passion Ferrari. L’esprit parisien.</p>
-    </div>
-    <span className={styles.heroSide}>PASSIONE SENZA FINE — DEPUIS 2010</span>
-    <div className={styles.heroBottom}>
-      <div className={styles.heroBottomCopy}><p>{current.note}</p><a href="#le-club">Entrez dans le club <span><ArrowDown size={18} /></span></a></div>
-      <div className={styles.chapterControl}>
-        <span className={styles.chapterLabel}>DÉCOUVRIR NOTRE UNIVERS</span>
-        <div className={styles.chapterRow}><span className={styles.chapterNumber}>{current.number}<small>/ 03</small></span><span className={styles.chapterName}>{current.name}</span><button onClick={previous} aria-label="Chapitre précédent"><ChevronLeft size={17} /></button><button onClick={next} aria-label="Chapitre suivant"><ChevronRight size={17} /></button></div>
-        <div className={styles.chapterProgress}>{chapters.map((item, index) => <button key={item.number} onClick={() => setChapter(index)} aria-label={`Afficher le chapitre ${item.number} : ${item.name}`} aria-pressed={chapter === index} className={chapter === index ? styles.chapterActive : ""} />)}</div>
-      </div>
-    </div>
-  </section>;
-}
-
 function LandingContent() {
   const root = useRef<HTMLDivElement>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -108,7 +78,7 @@ function LandingContent() {
     <a className={styles.skipLink} href="#le-club">Aller au contenu</a>
     <LandingHeader />
     <main>
-      <Hero />
+      <ScrollCarHero />
       <div className={styles.manifestoBar} aria-label="Les valeurs du club"><span>UNE MÊME PASSION</span><i /><span>DES RENCONTRES VRAIES</span><i /><span>L’ÉMOTION FERRARI</span><i /><span>L’ART DE VIVRE À PARIS</span><i /><span>FORZA, INSIEME.</span></div>
       <section id="le-club" className={styles.clubSection}>
         <div className={styles.sectionEyebrow} data-reveal><span>01 / LE CLUB</span><span>UNE HISTOIRE DE PASSIONNÉS</span></div>

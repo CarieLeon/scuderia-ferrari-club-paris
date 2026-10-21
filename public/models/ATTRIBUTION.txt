@@ -1,0 +1,14 @@
+Ferrari 458 Italia 3D model
+Original model by vicent091036.
+Original creator/model URL: https://sketchfab.com/models/57bf6cc56931426e87494f554df1dab6
+Model distributed with the official three.js car materials example:
+https://github.com/mrdoob/three.js/blob/dev/examples/webgl_materials_car.html
+Original file:
+https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/gltf/ferrari.glb
+
+Adaptation for Scuderia Ferrari Club Paris prototype (2026-10-21):
+Merged coincident vertices to identify original physical panels; grouped existing door skins, mirrors, handles and inner trim into conventional hinged door assemblies; isolated front bonnet and rear deck/engine cover; created four named hinge pivots; retained original mesh surfaces/materials and the four wheel groups; re-exported as Draco-compressed glTF 2.0.
+No new Ferrari model shape was authored.
+
+three.js software MIT license is reproduced in three-LICENSE.txt.
+This asset attribution is retained separately from the application source license.
