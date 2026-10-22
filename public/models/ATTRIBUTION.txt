@@ -14,9 +14,5 @@ orientation and local Draco compression; paint, glass and lighting adjusted for
 the studio scene. The source's detailed cockpit and engine are retained.
 No affiliation or endorsement by the artist is implied.
 
-Studio environment: Studio Small 05 by Greg Zaal / Poly Haven, CC0.
-https://polyhaven.com/a/studio_small_05
-https://polyhaven.com/license
-See environment/ATTRIBUTION.txt.
-
-Draco decoder: Google Draco, Apache License 2.0. See draco/LICENSE.txt.
+The model is retained as editable source for the pre-rendered sequence.
+It is not loaded by the browser. See /images/car-sequence/ATTRIBUTION.txt.

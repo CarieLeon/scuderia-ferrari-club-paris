@@ -1,0 +1,16 @@
+{
+  "count": 104,
+  "width": 1280,
+  "height": 800,
+  "mobileWidth": 768,
+  "mobileHeight": 480,
+  "keyframes": [
+    0,
+    59,
+    103
+  ],
+  "bytes": {
+    "desktop": 2711370,
+    "mobile": 1177086
+  }
+}

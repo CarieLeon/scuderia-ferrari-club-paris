@@ -1,0 +1,18 @@
+FERRARI F40 — PRE-RENDERED SCROLL SEQUENCE
+
+Original 3D model: Ferrari F40 by Black Snow (@BlackSnow02)
+https://sketchfab.com/3d-models/ferrari-f40-52a66c41cfcd4f999fb1b1c49bf24d70
+License: Creative Commons Attribution 4.0 International
+https://creativecommons.org/licenses/by/4.0/
+
+Public model distribution used: https://sceneview.github.io/models/platforms/ferrari_f40.glb
+Credits: https://sceneview.github.io/credits.html
+
+Adaptations: panels articulated while preserving source geometry and normals;
+paint, glazing, badges, graphite surfaces and engine materials adjusted;
+studio lights, camera choreography and floor created for this landing page;
+104 images rendered in Blender Cycles, then encoded at desktop/mobile resolutions.
+No endorsement by the original artist is implied.
+
+Reproduce: see scripts/render-car-sequence.py, scripts/prepare-f40-rig.py
+and scripts/encode-car-sequence.mjs in the project repository.
