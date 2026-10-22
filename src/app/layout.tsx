@@ -1,10 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Anton, Inter } from "next/font/google";
 
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import Preloader from "@/components/Preloader";
-import SmoothScroll from "@/components/SmoothScroll";
+import SiteShell from "@/components/SiteShell";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { siteConfig } from "@/lib/site";
 
@@ -95,12 +92,7 @@ export default function RootLayout({
       </head>
       <body className="bg-background font-sans text-foreground antialiased">
         <ThemeProvider>
-          <Preloader />
-          <SmoothScroll>
-            <Header />
-            <main>{children}</main>
-            <Footer />
-          </SmoothScroll>
+          <SiteShell>{children}</SiteShell>
         </ThemeProvider>
       </body>
     </html>

@@ -1,0 +1,17 @@
+FERRARI F40 — SCROLL RIG
+
+Source and license: see ATTRIBUTION.txt.
+Rebuild with Blender 4.1+: blender -b --python scripts/prepare-f40-rig.py -- <source.glb> <output.glb>
+The source GLB is available at https://sceneview.github.io/models/platforms/ferrari_f40.glb
+
+The exported glTF is Y-up; nose along negative Z; closed hinges use identity rotation.
+Opening angles in radians:
+- hinge_left: rotation.y = -1.08
+- hinge_right: rotation.y = +1.08
+- hinge_front: rotation.x = -1.0
+- hinge_rear: rotation.x = +1.1
+
+Original 245,552 triangles, authored split normals and UVs retained. Physical panel
+partitions derived from source indexed topology, without welding or decimation.
+Cockpit, V8 and suspension are part of the original model.
+Fallback poster is a native Blender render of this same F40.

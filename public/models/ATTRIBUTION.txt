@@ -1,0 +1,18 @@
+FERRARI F40 — 3D MODEL
+
+Author: Black Snow (@BlackSnow02)
+Original: https://sketchfab.com/3d-models/ferrari-f40-52a66c41cfcd4f999fb1b1c49bf24d70
+License: Creative Commons Attribution 4.0 International
+https://creativecommons.org/licenses/by/4.0/
+
+Public GLB distribution used:
+https://sceneview.github.io/models/platforms/ferrari_f40.glb
+Credits corroboration: https://sceneview.github.io/credits.html
+
+Adaptations for this demonstration: mesh partitioning and articulation, model
+orientation and local Draco compression; paint, glass and lighting adjusted for
+the studio scene. The source's detailed cockpit and engine are retained.
+No affiliation or endorsement by the artist is implied.
+
+The model is retained as editable source for the pre-rendered sequence.
+It is not loaded by the browser. See /images/car-sequence/ATTRIBUTION.txt.

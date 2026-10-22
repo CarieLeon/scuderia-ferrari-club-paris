@@ -23,7 +23,36 @@ npm run dev      # http://localhost:3000
 npm run build    # build de production
 npm run start    # sert le build de production
 npm run lint     # ESLint
+npm run test:scroll # séquence, réversibilité et intégrité des images
 ```
+
+## Introduction animée
+
+L’accueil utilise une séquence de 104 images calculées dans Blender Cycles. Le
+scroll choisit l’image affichée dans un canvas 2D : profil, ouverture des portes
+et capots, puis vue du moteur. Les boutons atteignent les trois poses fixes ;
+la préférence de mouvement réduit passe directement de l’une à l’autre.
+Les premières images apparaissent sans attendre le chargement de toute la série.
+Les fichiers mobiles et le cache des images décodées limitent la mémoire utilisée.
+
+Les images livrées sont dans `public/images/car-sequence`. Le modèle F40 original
+de Black Snow est conservé comme source éditable sous `public/models`, avec ses
+crédits CC BY 4.0. Il n’est pas chargé par le navigateur.
+
+Pour recalculer la séquence avec Blender 5.2 et Cycles :
+
+```bash
+blender --background --python scripts/render-car-sequence.py -- \
+  --source public/models/ferrari-f40-rigged.glb \
+  --outputdir work/f40-sequence --start 0 --end 103 \
+  --width 1280 --height 800 --samples 32 --device AUTO --keys-first
+node scripts/encode-car-sequence.mjs work/f40-sequence
+npm run test:scroll
+```
+
+Le script d’encodage produit les deux résolutions WebP. Lors d’un remplacement
+d’images déjà publiées, incrémenter `SEQUENCE_ASSET_VERSION` pour renouveler leur
+cache navigateur. Le rendu est également possible sur CPU avec `--device CPU`.
 
 ## Structure
 
